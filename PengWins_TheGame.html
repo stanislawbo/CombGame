@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Penguin Game</title>
+  <title>PengWins</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;900&display=swap');
 
@@ -334,7 +334,7 @@
 
   <!-- MENU SCREEN -->
   <div id="menu-screen" class="screen active">
-    <h1>🐧 Penguin Game</h1>
+    <h1 id="txt-title">🐧 PengWins</h1>
     <p class="subtitle" id="txt-subtitle">A game of ice and strategy</p>
     <div class="menu-buttons">
       <button id="btn-newgame" class="menu-btn primary" onclick="goToGame()">New Game</button>
@@ -348,16 +348,16 @@
   <div id="placeholder-screen" class="screen">
     <h2 id="placeholder-title"></h2>
     <p>Coming soon...</p>
-    <button class="menu-btn" onclick="showScreen('menu-screen')">← Back</button>
+    html<button class="menu-btn" id="back-about" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <!-- ABOUT SCREEN -->
   <div id="about-screen" class="screen">
     <h2 id="txt-about-title">About</h2>
     <div style="max-width: 400px; text-align: center; color: #e0f0ff; margin: 24px 0; line-height: 1.8;">
-      <p id="txt-about-body" style="background: #1e3d70; padding: 16px; border-radius: 8px;">Game was originally designed and created by S and K. It is a project for Lecture Combinatorical Games.</p>
+      <p id="txt-about-body" style="background: #1e3d70; padding: 16px; border-radius: 8px;">Game was originally designed and created by S. It is a project for Lecture Combinatorical Games.</p>
     </div>
-    <button class="menu-btn" onclick="showScreen('menu-screen')">← Back</button>
+    <button class="menu-btn" id="back-howtoplay" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <!-- HOW TO PLAY SCREEN -->
@@ -376,7 +376,7 @@
       <button class="slide-arrow" onclick="changeSlide(1)">→</button>
     </div>
 
-    <button class="menu-btn" onclick="showScreen('menu-screen')">← Back</button>
+    <button class="menu-btn" id="back-settings" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <!-- SETTINGS SCREEN -->
@@ -399,19 +399,19 @@
       <div>
         <p id="txt-language-label" style="color: #a8d8ff; font-weight: 700; margin-bottom: 10px; text-align: center;">Language:</p>
         <div style="display: flex; gap: 12px; justify-content: center;">
-          <button class="menu-btn" onclick="setLanguage('pl')">Polish</button>
-          <button class="menu-btn" onclick="setLanguage('en')">English</button>
+          <button id="btn-lang-pl" class="menu-btn" onclick="setLanguage('pl')">Polish</button>
+          <button id="btn-lang-en" class="menu-btn" onclick="setLanguage('en')">English</button>
         </div>
       </div>
 
     </div>
-    <button class="menu-btn" onclick="showScreen('menu-screen')">← Back</button>
+    <button class="menu-btn" id="back-placeholder" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <!-- GAME SCREEN -->
   <div id="game-screen" class="screen">
     <button id="menu-back-btn" onclick="goToMenu()">← Menu</button>
-    <h1>🐧 Penguin Game</h1>
+    <h1 id="txt-title">🐧 PengWins</h1>
     <div id="status">Press New Game to start</div>
     <div class="controls">
       <label id="txt-boardsize">Board size:</label>
@@ -439,6 +439,8 @@
 
     const translations = {
       en: {
+        back: '← Back',
+        gameTitle: '🐧 PengWins',
         subtitle: 'A game of ice and strategy',
         newGame: 'New Game',
         howToPlay: 'How to Play',
@@ -452,6 +454,8 @@
         joining: 'Entering',
         leaving: 'Leaving',
         languageLabel: 'Language:',
+        langPl: 'Polish',
+        langEn: 'English',  
         boardSize: 'Board size:',
         maxNum: 'Max number (<10):',
         newGameBtn: 'New Game',
@@ -466,21 +470,25 @@
         cpuNoMoves: '🎉 CPU has no moves! You win!',
       },
       pl: {
+        back: '← Powrót',
+        gameTitle: '🐧 PengWins',
         subtitle: 'Gra strategiczna na lodzie',
         newGame: 'Nowa Gra',
         howToPlay: 'Jak Grać',
         settings: 'Ustawienia',
         about: 'O Grze',
         aboutTitle: 'O Grze',
-        aboutBody: 'Gra została zaprojektowana i stworzona przez S i K. Jest to projekt na zajęcia Gry Kombinatoryczne.',
+        aboutBody: 'Gra została zaprojektowana i stworzona przez S. Jest to projekt na zajęcia Gry Kombinatoryczne.',
         howToPlayTitle: 'Jak Grać',
         settingsTitle: 'Ustawienia',
         decreaseLabel: 'Zmniejsz wartość na lodzie przy:',
         joining: 'Wejściu',
         leaving: 'Wyjściu',
         languageLabel: 'Język:',
+        langPl: 'Polski',
+        langEn: 'Angielski',
         boardSize: 'Rozmiar planszy:',
-        maxNum: 'Maks liczba (<10):',
+        maxNum: 'Maksymalna wartość na krach (<10):',
         newGameBtn: 'Nowa Gra',
         menuBtn: '← Menu',
         playAgain: 'Zagraj ponownie',
@@ -497,7 +505,14 @@
     function setLanguage(lang) {
       currentLang = lang;
       const t = translations[lang];
+      document.querySelectorAll('#txt-title').forEach(el => el.textContent = t.gameTitle);
       document.getElementById('txt-subtitle').textContent = t.subtitle;
+      document.getElementById('btn-newgame').closest('.screen').querySelector('h1').textContent = t.gameTitle;
+      document.title = t.gameTitle; 
+      document.getElementById('back-about').textContent = t.back;
+      document.getElementById('back-howtoplay').textContent = t.back;
+      document.getElementById('back-settings').textContent = t.back;
+      document.getElementById('back-placeholder').textContent = t.back;
       document.getElementById('btn-newgame').textContent = t.newGame;
       document.getElementById('btn-howtoplay').textContent = t.howToPlay;
       document.getElementById('btn-settings').textContent = t.settings;
@@ -510,6 +525,8 @@
       document.getElementById('txt-joining').textContent = t.joining;
       document.getElementById('txt-leaving').textContent = t.leaving;
       document.getElementById('txt-language-label').textContent = t.languageLabel;
+      document.getElementById('btn-lang-pl').textContent = t.langPl;
+      document.getElementById('btn-lang-en').textContent = t.langEn;
       document.getElementById('txt-boardsize').textContent = t.boardSize;
       document.getElementById('txt-maxnum').textContent = t.maxNum;
       document.getElementById('txt-newgame-btn').textContent = t.newGameBtn;
