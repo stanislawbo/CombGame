@@ -772,11 +772,26 @@ function changeSlide(dir) {
       }
 
       let move = moves[0];
-      for (let m of moves) {
-        if (gridData[m.row][m.col] > gridData[move.row][move.col]) {
-          move = m;
-        }
+    let bestScore = -1;
+
+    for (let m of moves) {
+      let prevRow = penguins[1].row;
+      let prevCol = penguins[1].col;
+      penguins[1].row = m.row;
+      penguins[1].col = m.col;
+
+      let futureMoves = getValidMoves(1).length;
+
+      penguins[1].row = prevRow;
+      penguins[1].col = prevCol;
+
+      let score = futureMoves * 10 + gridData[m.row][m.col];
+
+      if (score > bestScore) {
+        bestScore = score;
+        move = m;
       }
+    }
 
       movePenguin(1, move.row, move.col);
       renderGrid();
