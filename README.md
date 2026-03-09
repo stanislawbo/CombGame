@@ -5,15 +5,18 @@ The goal was to build a small interactive game and understand how to structure a
 
 This project was completed as part of a course assignment for one of my classes, allowing me to apply concepts from both mathematics and web development in a practical, interactive way.
 
-## How to Play ![Player](images/player.png)
+<h2 style="font-size:36px;">
+  How to Play 
+  <img src="images/player.png" alt="Player" width="32" height="32">
+</h2>
 
-- Set the size of the square ice grid and choose a natural number n for the maximum value of ice blocks.  
-- The game is played on a numbered ice grid, where each cell has a number from 1 to n, which was set at the beginning.  
-- Take turns moving your penguin and the CPU penguin. There are two game modes:  
-  • In one mode, stepping on a block decreases the number on it.  
-  • In the other mode, stepping out of a block decreases the number on it.  
-- The winner is the player who avoids stepping on a losing block, which is 0.  
-- The game runs entirely in the browser via link — no installation required.
+• Set the size of the square ice grid and choose a natural number n for the maximum value of ice blocks.  
+• The game is played on a numbered ice grid, where each cell has a number from 1 to n, which was set at the beginning.  
+• Take turns moving your penguin and the CPU penguin. There are two game modes:  
+• In one mode, stepping on a block decreases the number on it.  
+• In the other mode, stepping out of a block decreases the number on it.  
+• The winner is the player who avoids stepping on a losing block, which is 0.  
+• The game runs entirely in the browser via link — no installation required.
 
 ## Features
 
