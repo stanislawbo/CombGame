@@ -18,6 +18,8 @@ This project was completed as part of a course assignment for one of my classes,
 • The winner is the player who avoids stepping on a losing block, which is 0.  
 • The game runs entirely in the browser via link — no installation required.
 
+<img src="images/game/player.png" alt="Player" width="64" height="64">
+
 <h1>
   <span style="font-size:56px;">Features</span> 
   <img src="images/cpu.png" alt="Player" width="32" height="32">
