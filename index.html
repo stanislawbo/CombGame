@@ -80,7 +80,6 @@
       width: 220px;
     }
 
-
     .menu-btn {
       padding: 14px 20px;
       border-radius: 12px;
@@ -220,7 +219,9 @@
       background-position: center !important;
     }
 
-    .cell[data-value="0"] {background: #111a2e url('images/hole.png') center center / cover no-repeat !important;
+    .cell[data-value="0"] {
+      background: #111a2e url('images/hole.png') center center / cover no-repeat !important;
+    }
     .cell[data-value="1"] { background: #1a3a6a; color: #2a4a6a; border-color: #234a88; }
     .cell[data-value="2"] { background: #1a4a6a; color: #2a5a7a; border-color: #236088; }
     .cell[data-value="3"] { background: #1a5060; color: #2a6070; border-color: #237880; }
@@ -345,20 +346,13 @@
     </div>
   </div>
 
-  <!-- PLACEHOLDER SCREEN -->
-  <div id="placeholder-screen" class="screen">
-    <h2 id="placeholder-title"></h2>
-    <p>Coming soon...</p>
-    html<button class="menu-btn" id="back-about" onclick="showScreen('menu-screen')">← Back</button>
-  </div>
-
   <!-- ABOUT SCREEN -->
   <div id="about-screen" class="screen">
     <h2 id="txt-about-title">About</h2>
     <div style="max-width: 400px; text-align: center; color: #e0f0ff; margin: 24px 0; line-height: 1.8;">
       <p id="txt-about-body" style="background: #1e3d70; padding: 16px; border-radius: 8px;">Game was originally designed and created by S. It is a project for Lecture Combinatorical Games.</p>
     </div>
-    <button class="menu-btn" id="back-howtoplay" onclick="showScreen('menu-screen')">← Back</button>
+    <button class="menu-btn" id="back-about" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <!-- HOW TO PLAY SCREEN -->
@@ -377,7 +371,7 @@
       <button class="slide-arrow" onclick="changeSlide(1)">→</button>
     </div>
 
-    <button class="menu-btn" id="back-settings" onclick="showScreen('menu-screen')">← Back</button>
+    <button class="menu-btn" id="back-howtoplay" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <!-- SETTINGS SCREEN -->
@@ -406,13 +400,13 @@
       </div>
 
     </div>
-    <button class="menu-btn" id="back-placeholder" onclick="showScreen('menu-screen')">← Back</button>
+    <button class="menu-btn" id="back-settings" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <!-- GAME SCREEN -->
   <div id="game-screen" class="screen">
     <button id="menu-back-btn" onclick="goToMenu()">← Menu</button>
-    <h1 id="txt-title">PengWins</h1>
+    <h1 id="txt-game-title">PengWins</h1>
     <div id="status">Press New Game to start</div>
     <div class="controls">
       <label id="txt-boardsize">Board size:</label>
@@ -432,6 +426,11 @@
     <button id="txt-playagain" onclick="startGame()">Play Again</button>
     <button id="txt-seeboard" onclick="seeBoard()">See Board</button>
     <button id="txt-menubtn" onclick="goToMenu()">← Menu</button>
+  </div>
+
+  <!-- PLACEHOLDER needed for back-placeholder id referenced in setLanguage -->
+  <div id="placeholder-screen" class="screen" style="display:none;">
+    <button class="menu-btn" id="back-placeholder" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
   <script>
@@ -456,7 +455,7 @@
         leaving: 'Leaving',
         languageLabel: 'Language:',
         langPl: 'Polish',
-        langEn: 'English',  
+        langEn: 'English',
         boardSize: 'Board size:',
         maxNum: 'Max number (<10):',
         newGameBtn: 'New Game',
@@ -506,10 +505,9 @@
     function setLanguage(lang) {
       currentLang = lang;
       const t = translations[lang];
-      document.querySelectorAll('#txt-title').forEach(el => el.textContent = t.gameTitle);
+      document.querySelectorAll('#txt-title, #txt-game-title').forEach(el => el.textContent = t.gameTitle);
       document.getElementById('txt-subtitle').textContent = t.subtitle;
-      document.getElementById('btn-newgame').closest('.screen').querySelector('h1').textContent = t.gameTitle;
-      document.title = t.gameTitle; 
+      document.title = t.gameTitle;
       document.getElementById('back-about').textContent = t.back;
       document.getElementById('back-howtoplay').textContent = t.back;
       document.getElementById('back-settings').textContent = t.back;
@@ -561,27 +559,27 @@
     // ---- SLIDESHOW ----
     let currentSlide = 0;
 
-    const slides = {  
-  en: [
-    { img: 'images/image_1.png', text: 'You are a penguin, you can move on every square connected to yours or stay on your block.' },
-    { img: 'images/image_2.png', text: 'Every square has its number. There are two possible ways to play. The area decreases by 1, if you either get on it or leave it.' },
-    { img: 'images/image_3.png', text: 'If you stay on a block, you can see its durability on the top right.' },
-    { img: 'images/image_4.png', text: 'You play against another penguin, whoever stays on the ice the longest wins.' },
-  ],
-  pl: [
-    { img: 'images/image_1.png', text: 'Jesteś pingwinem, możesz się poruszać na każde sąsiednie pole lub zostać na swoim.' },
-    { img: 'images/image_2.png', text: 'Każde pole ma swoją liczbę. Są dwa tryby gry — wartość pola zmniejsza się o 1 przy wejściu lub wyjściu.' },
-    { img: 'images/image_3.png', text: 'Jeśli zostaniesz na polu, widzisz jego wytrzymałość w prawym górnym rogu.' },
-    { img: 'images/image_4.png', text: 'Grasz przeciwko innemu pingwinowi — wygrywa ten, kto dłużej utrzyma się na lodzie.' },
-  ]
-};
+    const slides = {
+      en: [
+        { img: 'images/image_1.png', text: 'You are a penguin, you can move on every square connected to yours or stay on your block.' },
+        { img: 'images/image_2.png', text: 'Every square has its number. There are two possible ways to play. The area decreases by 1, if you either get on it or leave it.' },
+        { img: 'images/image_3.png', text: 'If you stay on a block, you can see its durability on the top right.' },
+        { img: 'images/image_4.png', text: 'You play against another penguin, whoever stays on the ice the longest wins.' },
+      ],
+      pl: [
+        { img: 'images/image_1.png', text: 'Jesteś pingwinem, możesz się poruszać na każde sąsiednie pole lub zostać na swoim.' },
+        { img: 'images/image_2.png', text: 'Każde pole ma swoją liczbę. Są dwa tryby gry — wartość pola zmniejsza się o 1 przy wejściu lub wyjściu.' },
+        { img: 'images/image_3.png', text: 'Jeśli zostaniesz na polu, widzisz jego wytrzymałość w prawym górnym rogu.' },
+        { img: 'images/image_4.png', text: 'Grasz przeciwko innemu pingwinowi — wygrywa ten, kto dłużej utrzyma się na lodzie.' },
+      ]
+    };
 
-function changeSlide(dir) {
-  currentSlide = (currentSlide + dir + slides[currentLang].length) % slides[currentLang].length;
-  document.getElementById('slide-img').src = slides[currentLang][currentSlide].img;
-  document.getElementById('slide-text').textContent = slides[currentLang][currentSlide].text;
-  document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + slides[currentLang].length;
-}
+    function changeSlide(dir) {
+      currentSlide = (currentSlide + dir + slides[currentLang].length) % slides[currentLang].length;
+      document.getElementById('slide-img').src = slides[currentLang][currentSlide].img;
+      document.getElementById('slide-text').textContent = slides[currentLang][currentSlide].text;
+      document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + slides[currentLang].length;
+    }
 
     // ---- GAME STATE ----
     let gridSize = 4;
@@ -631,23 +629,23 @@ function changeSlide(dir) {
     }
 
     function placePenguinsRandomly() {
-        do {
-          penguins[0].row = Math.floor(Math.random() * gridSize);
-          penguins[0].col = Math.floor(Math.random() * gridSize);
-        } while (gridData[penguins[0].row][penguins[0].col] <= 1);
+      do {
+        penguins[0].row = Math.floor(Math.random() * gridSize);
+        penguins[0].col = Math.floor(Math.random() * gridSize);
+      } while (gridData[penguins[0].row][penguins[0].col] <= 1);
 
-        let r2, c2;
-        do {
-          r2 = Math.floor(Math.random() * gridSize);
-          c2 = Math.floor(Math.random() * gridSize);
-        } while (
-          gridData[r2][c2] <= 1 ||
-          (r2 === penguins[0].row && c2 === penguins[0].col)
-        );
+      let r2, c2;
+      do {
+        r2 = Math.floor(Math.random() * gridSize);
+        c2 = Math.floor(Math.random() * gridSize);
+      } while (
+        gridData[r2][c2] <= 1 ||
+        (r2 === penguins[0].row && c2 === penguins[0].col)
+      );
 
-        penguins[1].row = r2;
-        penguins[1].col = c2;
-      }
+      penguins[1].row = r2;
+      penguins[1].col = c2;
+    }
 
     function decreaseSquare(r, c, i, causesDeath) {
       gridData[r][c]--;
@@ -655,7 +653,7 @@ function changeSlide(dir) {
         gridData[r][c] = 0;
         if (causesDeath) penguins[i].alive = false;
       }
-}
+    }
 
     function movePenguin(i, newRow, newCol) {
       let p = penguins[i];
