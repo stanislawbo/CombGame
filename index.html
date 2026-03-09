@@ -593,7 +593,7 @@ function changeSlide(dir) {
 
     let penguins = [
       { row: -1, col: -1, img: 'images/player.png', alive: true },
-      { row: -1, col: -1, img: 'cpu.png', alive: true }
+      { row: -1, col: -1, img: 'images/cpu.png', alive: true }
     ];
 
     function getMode() {
@@ -612,7 +612,7 @@ function changeSlide(dir) {
       currentTurn = 0;
 
       penguins[0] = { row: -1, col: -1, img: 'images/player.png', alive: true };
-      penguins[1] = { row: -1, col: -1, img: 'cpu.png', alive: true };
+      penguins[1] = { row: -1, col: -1, img: 'images/cpu.png', alive: true };
 
       document.getElementById('overlay').classList.remove('show');
 
