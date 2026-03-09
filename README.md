@@ -5,6 +5,8 @@ The goal was to build a small interactive game and understand how to structure a
 
 This project was completed as part of a course assignment for one of my classes, allowing me to apply concepts from both mathematics and web development in a practical, interactive way.
 
+![Game](images/game.png)
+
 <h1>
   <span style="font-size:56px;">How to Play</span> 
   <img src="images/player.png" alt="Player" width="32" height="32">
@@ -17,8 +19,6 @@ This project was completed as part of a course assignment for one of my classes,
 • In the other mode, stepping out of a block decreases the number on it.  
 • The winner is the player who avoids stepping on a losing block, which is 0.  
 • The game runs entirely in the browser via link — no installation required.
-
-![Game](images/game.png)
 
 <h1>
   <span style="font-size:56px;">Features</span> 
