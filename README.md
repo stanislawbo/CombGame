@@ -7,7 +7,7 @@ This project was completed as part of a course assignment for one of my classes,
 
 <h2 style="font-size:36px;">
   How to Play 
-  <img src="images/player.png" alt="Player" width="40" height="40">
+  <img src="images/player.png" alt="Player" width="32" height="32">
 </h2>
 
 • Set the size of the square ice grid and choose a natural number n for the maximum value of ice blocks.  
