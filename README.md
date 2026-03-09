@@ -17,8 +17,6 @@ This project was completed as part of a course assignment for one of my classes,
 
 ## Features
 
-## Features
-
 - Two language options available for the game interface.  
 - Special section explaining the game rules in detail.  
 - Settings that prevent instant loss for either the player or CPU.
