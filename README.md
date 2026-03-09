@@ -6,8 +6,8 @@ The goal was to build a small interactive game and understand how to structure a
 This project was completed as part of a course assignment for one of my classes, allowing me to apply concepts from both mathematics and web development in a practical, interactive way.
 
 <h1>
-  <span style="font-size:76px;">How to Play</span> 
-  <img src="images/player.png" alt="Player" width="50" height="350">
+  <span style="font-size:56px;">How to Play</span> 
+  <img src="images/player.png" alt="Player" width="32" height="32">
 </h1>
 
 • Set the size of the square ice grid and choose a natural number n for the maximum value of ice blocks.  
