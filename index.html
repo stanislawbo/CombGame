@@ -592,7 +592,7 @@ function changeSlide(dir) {
     let gameOver = false;
 
     let penguins = [
-      { row: -1, col: -1, img: 'player.png', alive: true },
+      { row: -1, col: -1, img: 'images/player.png', alive: true },
       { row: -1, col: -1, img: 'cpu.png', alive: true }
     ];
 
@@ -611,7 +611,7 @@ function changeSlide(dir) {
       gameOver = false;
       currentTurn = 0;
 
-      penguins[0] = { row: -1, col: -1, img: 'player.png', alive: true };
+      penguins[0] = { row: -1, col: -1, img: 'images/player.png', alive: true };
       penguins[1] = { row: -1, col: -1, img: 'cpu.png', alive: true };
 
       document.getElementById('overlay').classList.remove('show');
