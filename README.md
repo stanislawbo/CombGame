@@ -5,7 +5,7 @@ The goal was to build a small interactive game and understand how to structure a
 
 This project was completed as part of a course assignment for one of my classes, allowing me to apply concepts from both mathematics and web development in a practical, interactive way.
 
-<h2 style="font-size:96px;">
+<h2 style="font-size:196px;">
   How to Play 
   <img src="images/player.png" alt="Player" width="32" height="32">
 </h2>
