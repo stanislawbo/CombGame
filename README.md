@@ -14,3 +14,12 @@ This project was completed as part of a course assignment for one of my classes,
   • In the other mode, stepping out of a block decreases the number on it.  
 - The winner is the player who avoids stepping on a losing block, which is 0.  
 - The game runs entirely in the browser via link — no installation required.
+
+## Features
+
+## Features
+
+- Two language options available for the game interface  
+- Special section explaining the game rules in detail  
+- Settings that prevent instant loss for either the player or CPU  
+• For example, the game ensures a penguin does not spawn on a block with 1 at the start
