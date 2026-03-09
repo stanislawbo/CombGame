@@ -18,10 +18,10 @@ This project was completed as part of a course assignment for one of my classes,
 • The winner is the player who avoids stepping on a losing block, which is 0.  
 • The game runs entirely in the browser via link — no installation required.
 
-<h2>
-  <span style="font-size:56px;">How to Play</span> 
+<h1>
+  <span style="font-size:56px;">Features</span> 
   <img src="images/cpu.png" alt="Player" width="32" height="32">
-</h2>
+</h1>
 
 - Two language options available for the game interface.  
 - Special section explaining the game rules in detail.  
