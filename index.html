@@ -239,15 +239,15 @@
     .cell.valid-move:hover {
       transform: scale(1.1);
     }
-    
-    .valid-move-p2 {
+
+    .cell.valid-move-p2 {
       box-shadow: 0 0 16px rgba(165, 28, 28, 0.5);
       border-color: #ff4444 !important;
       border-width: 4px !important;
       cursor: pointer;
     }
-    
-    .valid-move-p2:hover {
+
+    .cell.valid-move-p2:hover {
       transform: scale(1.1);
     }
 
@@ -364,19 +364,15 @@
   <!-- HOW TO PLAY SCREEN -->
   <div id="howtoplay-screen" class="screen">
     <h2 id="txt-howtoplay-title">How to Play</h2>
-
     <div style="display: flex; align-items: center; gap: 16px; margin: 24px 0;">
       <button class="slide-arrow" onclick="changeSlide(-1)">←</button>
-
       <div style="width: 280px; text-align: center;">
         <img id="slide-img" src="images/image_1.png" style="width: 280px; height: 200px; object-fit: contain; border-radius: 12px; background: #162d55; border: 1px solid #2a4a7a;" />
         <p id="slide-text" style="background: #1e3d70; padding: 16px; border-radius: 8px; margin-top: 12px; color: #e0f0ff; line-height: 1.8;">You are a penguin, you can move on every square connected to yours or stay on your block.</p>
         <p id="slide-counter" style="color: #5a8abf; margin-top: 8px; font-size: 0.9rem;">1 / 4</p>
       </div>
-
       <button class="slide-arrow" onclick="changeSlide(1)">→</button>
     </div>
-
     <button class="menu-btn" id="back-howtoplay" onclick="showScreen('menu-screen')">← Back</button>
   </div>
 
@@ -384,7 +380,6 @@
   <div id="settings-screen" class="screen">
     <h2 id="txt-settings-title">Settings</h2>
     <div style="margin: 24px 0; display: flex; flex-direction: column; gap: 24px; width: 300px; align-items: center;">
-
       <div>
         <p id="txt-decrease-label" style="color: #a8d8ff; font-weight: 700; margin-bottom: 10px; text-align: center;">Decrease ice level when:</p>
         <div style="display: flex; gap: 12px; justify-content: center;">
@@ -396,7 +391,6 @@
           </label>
         </div>
       </div>
-
       <div>
         <p id="txt-language-label" style="color: #a8d8ff; font-weight: 700; margin-bottom: 10px; text-align: center;">Language:</p>
         <div style="display: flex; gap: 12px; justify-content: center;">
@@ -404,7 +398,6 @@
           <button id="btn-lang-en" class="menu-btn" onclick="setLanguage('en')">English</button>
         </div>
       </div>
-
     </div>
     <button class="menu-btn" id="back-settings" onclick="showScreen('menu-screen')">← Back</button>
   </div>
@@ -413,7 +406,7 @@
   <div id="game-screen" class="screen">
     <button id="menu-back-btn" onclick="goToMenu()">← Menu</button>
     <h1 id="txt-game-title">PengWins</h1>
-    <div id="status">Press New Game to start</div>
+    <div id="status">Choose a game mode to start</div>
     <div class="controls">
       <label id="txt-boardsize">Board size:</label>
       <input type="number" id="grid-size" value="4" min="3" max="12" />
@@ -421,8 +414,8 @@
       <input type="number" id="max-val" value="3" min="1" max="9" />
     </div>
     <div class="controls">
-    <button id="btn-vs-cpu" class="menu-btn primary" onclick="startGame('cpu')">🐦 vs CPU</button>
-    <button id="btn-vs-player" class="menu-btn primary" onclick="startGame('player')">🐧 vs 🐧 2 Players</button>
+      <button id="btn-vs-cpu" class="menu-btn primary" onclick="startGame('cpu')">🐦 vs CPU</button>
+      <button id="btn-vs-player" class="menu-btn primary" onclick="startGame('player')">🐧 vs 🐧 2 Players</button>
     </div>
     <div id="grid-container"></div>
   </div>
@@ -448,6 +441,7 @@
         back: '← Back',
         gameTitle: 'PengWins',
         subtitle: 'A game of ice and strategy',
+        newGame: 'New Game',
         vsCpu: '🐦 vs CPU',
         vsPlayer: '🐧 vs 🐧 2 Players',
         howToPlay: 'How to Play',
@@ -465,7 +459,6 @@
         langEn: 'English',
         boardSize: 'Board size:',
         maxNum: 'Max number (<10):',
-        newGameBtn: 'New Game',
         menuBtn: '← Menu',
         playAgain: 'Play Again',
         seeBoard: 'See Board',
@@ -485,6 +478,7 @@
         back: '← Powrót',
         gameTitle: 'PengWins',
         subtitle: 'Gra strategiczna na lodzie',
+        newGame: 'Nowa Gra',
         vsCpu: '🐦 vs CPU',
         vsPlayer: '🐧 vs 🐧 2 Graczy',
         howToPlay: 'Jak Grać',
@@ -502,7 +496,6 @@
         langEn: 'Angielski',
         boardSize: 'Rozmiar planszy:',
         maxNum: 'Maksymalna wartość na krach (<10):',
-        newGameBtn: 'Nowa Gra',
         menuBtn: '← Menu',
         playAgain: 'Zagraj ponownie',
         seeBoard: 'Zobacz planszę',
@@ -530,6 +523,7 @@
       document.getElementById('back-howtoplay').textContent = t.back;
       document.getElementById('back-settings').textContent = t.back;
       document.getElementById('back-placeholder').textContent = t.back;
+      document.getElementById('btn-newgame').textContent = t.newGame;
       document.getElementById('btn-vs-cpu').textContent = t.vsCpu;
       document.getElementById('btn-vs-player').textContent = t.vsPlayer;
       document.getElementById('btn-howtoplay').textContent = t.howToPlay;
@@ -547,7 +541,6 @@
       document.getElementById('btn-lang-en').textContent = t.langEn;
       document.getElementById('txt-boardsize').textContent = t.boardSize;
       document.getElementById('txt-maxnum').textContent = t.maxNum;
-      document.getElementById('txt-newgame-btn').textContent = t.newGameBtn;
       document.getElementById('menu-back-btn').textContent = t.menuBtn;
       document.getElementById('txt-playagain').textContent = t.playAgain;
       document.getElementById('txt-seeboard').textContent = t.seeBoard;
@@ -559,10 +552,6 @@
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-    }
-
-    function goToGame() {
-    showScreen('game-screen');
     }
 
     function goToMenu() {
@@ -600,7 +589,7 @@
     }
 
     // ---- GAME STATE ----
-    let gameMode = 'cpu'; // 'cpu' or 'player'
+    let gameMode = 'cpu';
     let gridSize = 4;
     let maxVal = 3;
     let gridData = [];
@@ -623,7 +612,7 @@
     }
 
     function startGame(mode) {
-    if (mode) gameMode = mode;
+      if (mode) gameMode = mode;
       gridSize = parseInt(document.getElementById('grid-size').value);
       maxVal   = parseInt(document.getElementById('max-val').value);
       gameOver = false;
@@ -722,7 +711,7 @@
       container.style.gridTemplateColumns = `repeat(${gridSize}, 80px)`;
       container.innerHTML = '';
 
-      llet validMovesP1 = [];
+      let validMovesP1 = [];
       let validMovesP2 = [];
       if (!gameOver) {
         if (currentTurn === 0) {
@@ -754,7 +743,7 @@
 
           let isP1Move = validMovesP1.some(m => m.row === r && m.col === c);
           let isP2Move = validMovesP2.some(m => m.row === r && m.col === c);
-          
+
           if (isP1Move) {
             cell.classList.add('valid-move');
             cell.addEventListener('click', () => humanMove(0, r, c));
@@ -778,7 +767,6 @@
       }
     }
 
-    // handles both player 1 and player 2 clicks
     function humanMove(playerIndex, row, col) {
       if (gameOver) return;
       if (currentTurn !== playerIndex) return;
