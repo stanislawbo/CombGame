@@ -797,11 +797,11 @@
       }
 
       updateStatus();
-
+      renderGrid();
+      
       if (gameMode === 'cpu' && currentTurn === 1) {
         setTimeout(cpuMove, 700);
       }
-    }
 
     function cpuMove() {
       if (gameOver) return;
