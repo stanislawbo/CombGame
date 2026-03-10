@@ -394,6 +394,7 @@
 
     const translations = {
       en: {
+        equalNumbers: 'Equal numbers',
         back: '← Back',
         gameTitle: 'PengWins',
         subtitle: 'A game of ice and strategy',
@@ -431,6 +432,7 @@
         cpuNoMovesCpu: '🎉 CPU has no moves! You win!',
       },
       pl: {
+        equalNumbers: 'Równe liczby',
         back: '← Powrót',
         gameTitle: 'PengWins',
         subtitle: 'Gra strategiczna na lodzie',
@@ -475,6 +477,7 @@
       document.querySelectorAll('#txt-title, #txt-game-title').forEach(el => el.textContent = t.gameTitle);
       document.getElementById('txt-subtitle').textContent = t.subtitle;
       document.title = t.gameTitle;
+      document.getElementById('txt-equal').textContent = t.equalNumbers;
       document.getElementById('back-about').textContent = t.back;
       document.getElementById('back-howtoplay').textContent = t.back;
       document.getElementById('back-settings').textContent = t.back;
@@ -582,7 +585,7 @@
       for (let r = 0; r < gridSize; r++) {
         gridData[r] = [];
         for (let c = 0; c < gridSize; c++) {
-          gridData[r][c] = randomValue(maxVal);
+          gridData[r][c] = document.getElementById('equal-numbers').checked ? maxVal : randomValue(maxVal);
         }
       }
 
