@@ -717,6 +717,7 @@
           validMoves = getValidMoves(currentTurn);
         }
       }
+      const isPlayer2Turn = gameMode === 'player' && currentTurn === 1;
 
       for (let r = 0; r < gridSize; r++) {
         for (let c = 0; c < gridSize; c++) {
@@ -740,8 +741,8 @@
 
           let isValid = validMoves.some(m => m.row === r && m.col === c);
           if (isValid) {
-            cell.classList.add('valid-move');
-            cell.addEventListener('click', () => humanMove(currentTurn, r, c));
+          cell.classList.add(isPlayer2Turn ? 'valid-move-p2' : 'valid-move');
+          cell.addEventListener('click', () => humanMove(currentTurn, r, c));
           }
 
           for (let p of penguins) {
