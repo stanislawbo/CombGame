@@ -46,7 +46,6 @@
       margin-bottom: 16px;
     }
 
-    /* ---- SCREENS ---- */
     .screen {
       display: none;
       flex-direction: column;
@@ -60,7 +59,6 @@
       display: flex;
     }
 
-    /* ---- MENU SCREEN ---- */
     #menu-screen h1 {
       font-size: 3rem;
       margin-bottom: 12px;
@@ -108,7 +106,6 @@
       background: #3a82e0;
     }
 
-    /* ---- GAME SCREEN ---- */
     #menu-back-btn {
       position: fixed;
       top: 16px;
@@ -264,7 +261,6 @@
       color: #0d2068;
     }
 
-    /* ---- OVERLAY ---- */
     #overlay {
       display: none;
       position: fixed;
@@ -309,7 +305,6 @@
       background: #3a82e0;
     }
 
-    /* ---- SLIDE ARROWS ---- */
     .slide-arrow {
       width: 56px;
       height: 56px;
@@ -339,7 +334,7 @@
     <h1 id="txt-title">PengWins</h1>
     <p class="subtitle" id="txt-subtitle">A game of ice and strategy</p>
     <div class="menu-buttons">
-      <button id="btn-newgame" class="menu-btn primary" onclick="goToGame()">New Game</button>
+      <button id="btn-newgame" class="menu-btn primary" onclick="showScreen('game-screen')">New Game</button>
       <button id="btn-howtoplay" class="menu-btn" onclick="showScreen('howtoplay-screen')">How to Play</button>
       <button id="btn-settings" class="menu-btn" onclick="showScreen('settings-screen')">Settings</button>
       <button id="btn-about" class="menu-btn" onclick="showScreen('about-screen')">About</button>
@@ -415,7 +410,8 @@
       <input type="number" id="max-val" value="3" min="1" max="9" />
     </div>
     <div class="controls">
-      <button id="txt-newgame-btn" onclick="startGame()">New Game</button>
+    <button id="btn-vs-cpu" class="menu-btn primary" onclick="startGame('cpu')">🐦 vs CPU</button>
+    <button id="btn-vs-player" class="menu-btn primary" onclick="startGame('player')">🐧 vs 🐧 2 Players</button>
     </div>
     <div id="grid-container"></div>
   </div>
@@ -428,7 +424,6 @@
     <button id="txt-menubtn" onclick="goToMenu()">← Menu</button>
   </div>
 
-  <!-- PLACEHOLDER needed for back-placeholder id referenced in setLanguage -->
   <div id="placeholder-screen" class="screen" style="display:none;">
     <button class="menu-btn" id="back-placeholder" onclick="showScreen('menu-screen')">← Back</button>
   </div>
@@ -442,7 +437,8 @@
         back: '← Back',
         gameTitle: 'PengWins',
         subtitle: 'A game of ice and strategy',
-        newGame: 'New Game',
+        vsCpu: '🐦 vs CPU',
+        vsPlayer: '🐧 vs 🐧 2 Players',
         howToPlay: 'How to Play',
         settings: 'Settings',
         about: 'About',
@@ -462,18 +458,24 @@
         menuBtn: '← Menu',
         playAgain: 'Play Again',
         seeBoard: 'See Board',
-        yourTurn: '🐧 Your turn — click a highlighted square',
+        yourTurn: '🐧 Player 1 turn — click a highlighted square',
+        player2Turn: '🐦 Player 2 turn — click a highlighted square',
         cpuThinking: '🐦 CPU is thinking...',
-        youDied: '💀 You died! CPU wins!',
+        p1Died: '💀 Player 1 died! Player 2 wins!',
+        p2Died: '🎉 Player 2 died! Player 1 wins!',
+        youDiedCpu: '💀 You died! CPU wins!',
         cpuDied: '🎉 CPU died! You win!',
-        noMoves: '💀 You have no moves! CPU wins!',
-        cpuNoMoves: '🎉 CPU has no moves! You win!',
+        noMoves: '💀 Player 1 has no moves! Player 2 wins!',
+        cpuNoMoves: '🎉 Player 2 has no moves! Player 1 wins!',
+        noMovesCpu: '💀 You have no moves! CPU wins!',
+        cpuNoMovesCpu: '🎉 CPU has no moves! You win!',
       },
       pl: {
         back: '← Powrót',
         gameTitle: 'PengWins',
         subtitle: 'Gra strategiczna na lodzie',
-        newGame: 'Nowa Gra',
+        vsCpu: '🐦 vs CPU',
+        vsPlayer: '🐧 vs 🐧 2 Graczy',
         howToPlay: 'Jak Grać',
         settings: 'Ustawienia',
         about: 'O Grze',
@@ -493,12 +495,17 @@
         menuBtn: '← Menu',
         playAgain: 'Zagraj ponownie',
         seeBoard: 'Zobacz planszę',
-        yourTurn: '🐧 Twój ruch — kliknij podświetlone pole',
+        yourTurn: '🐧 Ruch gracza 1 — kliknij podświetlone pole',
+        player2Turn: '🐦 Ruch gracza 2 — kliknij podświetlone pole',
         cpuThinking: '🐦 CPU myśli...',
-        youDied: '💀 Zginąłeś! CPU wygrywa!',
+        p1Died: '💀 Gracz 1 zginął! Gracz 2 wygrywa!',
+        p2Died: '🎉 Gracz 2 zginął! Gracz 1 wygrywa!',
+        youDiedCpu: '💀 Zginąłeś! CPU wygrywa!',
         cpuDied: '🎉 CPU zginęło! Wygrywasz!',
-        noMoves: '💀 Nie masz ruchów! CPU wygrywa!',
-        cpuNoMoves: '🎉 CPU nie ma ruchów! Wygrywasz!',
+        noMoves: '💀 Gracz 1 nie ma ruchów! Gracz 2 wygrywa!',
+        cpuNoMoves: '🎉 Gracz 2 nie ma ruchów! Gracz 1 wygrywa!',
+        noMovesCpu: '💀 Nie masz ruchów! CPU wygrywa!',
+        cpuNoMovesCpu: '🎉 CPU nie ma ruchów! Wygrywasz!',
       }
     };
 
@@ -512,7 +519,8 @@
       document.getElementById('back-howtoplay').textContent = t.back;
       document.getElementById('back-settings').textContent = t.back;
       document.getElementById('back-placeholder').textContent = t.back;
-      document.getElementById('btn-newgame').textContent = t.newGame;
+      document.getElementById('btn-vs-cpu').textContent = t.vsCpu;
+      document.getElementById('btn-vs-player').textContent = t.vsPlayer;
       document.getElementById('btn-howtoplay').textContent = t.howToPlay;
       document.getElementById('btn-settings').textContent = t.settings;
       document.getElementById('btn-about').textContent = t.about;
@@ -543,8 +551,7 @@
     }
 
     function goToGame() {
-      showScreen('game-screen');
-      startGame();
+    showScreen('game-screen');
     }
 
     function goToMenu() {
@@ -582,6 +589,7 @@
     }
 
     // ---- GAME STATE ----
+    let gameMode = 'cpu'; // 'cpu' or 'player'
     let gridSize = 4;
     let maxVal = 3;
     let gridData = [];
@@ -603,7 +611,8 @@
       return Math.floor(Math.random() * (maxVal - 1)) + 2;
     }
 
-    function startGame() {
+    function startGame(mode) {
+    if (mode) gameMode = mode;
       gridSize = parseInt(document.getElementById('grid-size').value);
       maxVal   = parseInt(document.getElementById('max-val').value);
       gameOver = false;
@@ -703,8 +712,10 @@
       container.innerHTML = '';
 
       let validMoves = [];
-      if (currentTurn === 0 && !gameOver) {
-        validMoves = getValidMoves(0);
+      if (!gameOver) {
+        if (currentTurn === 0 || (gameMode === 'player' && currentTurn === 1)) {
+          validMoves = getValidMoves(currentTurn);
+        }
       }
 
       for (let r = 0; r < gridSize; r++) {
@@ -730,7 +741,7 @@
           let isValid = validMoves.some(m => m.row === r && m.col === c);
           if (isValid) {
             cell.classList.add('valid-move');
-            cell.addEventListener('click', () => playerMove(r, c));
+            cell.addEventListener('click', () => humanMove(currentTurn, r, c));
           }
 
           for (let p of penguins) {
@@ -747,20 +758,41 @@
       }
     }
 
-    function playerMove(row, col) {
-      if (currentTurn !== 0 || gameOver) return;
+    // handles both player 1 and player 2 clicks
+    function humanMove(playerIndex, row, col) {
+      if (gameOver) return;
+      if (currentTurn !== playerIndex) return;
 
-      movePenguin(0, row, col);
+      const t = translations[currentLang];
+      movePenguin(playerIndex, row, col);
       renderGrid();
 
-      if (!penguins[0].alive) {
-        endGame(translations[currentLang].youDied);
+      if (!penguins[playerIndex].alive) {
+        if (gameMode === 'cpu') {
+          endGame(playerIndex === 0 ? t.youDiedCpu : t.cpuDied);
+        } else {
+          endGame(playerIndex === 0 ? t.p1Died : t.p2Died);
+        }
         return;
       }
 
-      currentTurn = 1;
+      currentTurn = 1 - playerIndex;
+
+      let nextMoves = getValidMoves(currentTurn);
+      if (nextMoves.length === 0) {
+        if (gameMode === 'cpu') {
+          endGame(currentTurn === 1 ? t.cpuNoMovesCpu : t.noMovesCpu);
+        } else {
+          endGame(currentTurn === 1 ? t.cpuNoMoves : t.noMoves);
+        }
+        return;
+      }
+
       updateStatus();
-      setTimeout(cpuMove, 700);
+
+      if (gameMode === 'cpu' && currentTurn === 1) {
+        setTimeout(cpuMove, 700);
+      }
     }
 
     function cpuMove() {
@@ -769,7 +801,7 @@
       let moves = getValidMoves(1);
 
       if (moves.length === 0) {
-        endGame(translations[currentLang].cpuNoMoves);
+        endGame(translations[currentLang].cpuNoMovesCpu);
         return;
       }
 
@@ -791,7 +823,7 @@
       currentTurn = 0;
       let playerMoves = getValidMoves(0);
       if (playerMoves.length === 0) {
-        endGame(translations[currentLang].noMoves);
+        endGame(translations[currentLang].noMovesCpu);
         return;
       }
 
@@ -802,7 +834,11 @@
     function updateStatus() {
       const el = document.getElementById('status');
       const t = translations[currentLang];
-      el.textContent = currentTurn === 0 ? t.yourTurn : t.cpuThinking;
+      if (gameMode === 'cpu') {
+        el.textContent = currentTurn === 0 ? t.yourTurn : t.cpuThinking;
+      } else {
+        el.textContent = currentTurn === 0 ? t.yourTurn : t.player2Turn;
+      }
     }
 
     function endGame(message) {
