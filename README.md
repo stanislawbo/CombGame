@@ -31,3 +31,5 @@ This project was completed as part of a course assignment for one of my classes,
 • Special section explaining the game rules in detail.  
 • Settings that prevent instant loss for either the player or CPU.
 - For example, the game ensures a penguin does not spawn on a block with 1 at the start.
+
+To Be Continued...
