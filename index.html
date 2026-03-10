@@ -596,23 +596,25 @@
     }
 
     function placePenguinsRandomly() {
-      do {
-        penguins[0].row = Math.floor(Math.random() * gridSize);
-        penguins[0].col = Math.floor(Math.random() * gridSize);
-      } while (gridData[penguins[0].row][penguins[0].col] <= 1);
-
-      let r2, c2;
-      do {
-        r2 = Math.floor(Math.random() * gridSize);
-        c2 = Math.floor(Math.random() * gridSize);
-      } while (
-        gridData[r2][c2] <= 1 ||
-        (r2 === penguins[0].row && c2 === penguins[0].col)
-      );
-
-      penguins[1].row = r2;
-      penguins[1].col = c2;
-    }
+    const minVal = document.getElementById('equal-numbers').checked ? maxVal : 2;
+  
+    do {
+      penguins[0].row = Math.floor(Math.random() * gridSize);
+      penguins[0].col = Math.floor(Math.random() * gridSize);
+    } while (gridData[penguins[0].row][penguins[0].col] < minVal);
+  
+    let r2, c2;
+    do {
+      r2 = Math.floor(Math.random() * gridSize);
+      c2 = Math.floor(Math.random() * gridSize);
+    } while (
+      gridData[r2][c2] < minVal ||
+      (r2 === penguins[0].row && c2 === penguins[0].col)
+    );
+  
+    penguins[1].row = r2;
+    penguins[1].col = c2;
+  }
 
     function decreaseSquare(r, c, i, causesDeath) {
       gridData[r][c]--;
