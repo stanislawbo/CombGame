@@ -8,16 +8,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;900&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body {
-      min-height: 100%;
-      width: 100%;
-    }
+    html, body { min-height: 100%; width: 100%; }
 
     body {
       background: #0f1f3d url('images/background.jpg') center center / cover no-repeat fixed;
@@ -55,14 +48,9 @@
       min-height: 100vh;
     }
 
-    .screen.active {
-      display: flex;
-    }
+    .screen.active { display: flex; }
 
-    #menu-screen h1 {
-      font-size: 3rem;
-      margin-bottom: 12px;
-    }
+    #menu-screen h1 { font-size: 3rem; margin-bottom: 12px; }
 
     #menu-screen .subtitle {
       font-size: 1rem;
@@ -92,19 +80,10 @@
       text-align: center;
     }
 
-    .menu-btn:hover {
-      background: #1e3d70;
-      transform: translateY(-2px);
-    }
+    .menu-btn:hover { background: #1e3d70; transform: translateY(-2px); }
 
-    .menu-btn.primary {
-      background: #2a6abf;
-      border-color: #3a82e0;
-    }
-
-    .menu-btn.primary:hover {
-      background: #3a82e0;
-    }
+    .menu-btn.primary { background: #2a6abf; border-color: #3a82e0; }
+    .menu-btn.primary:hover { background: #3a82e0; }
 
     #menu-back-btn {
       position: fixed;
@@ -121,9 +100,7 @@
       cursor: pointer;
     }
 
-    #menu-back-btn:hover {
-      background: #3a82e0;
-    }
+    #menu-back-btn:hover { background: #3a82e0; }
 
     #status {
       font-size: 1.1rem;
@@ -141,11 +118,7 @@
       margin-bottom: 16px;
     }
 
-    .controls label {
-      font-size: 0.95rem;
-      color: #acbbc8;
-      font-weight: 700;
-    }
+    .controls label { font-size: 0.95rem; color: #acbbc8; font-weight: 700; }
 
     .controls input[type="number"] {
       width: 64px;
@@ -161,9 +134,7 @@
       transition: border-color 0.2s;
     }
 
-    .controls input[type="number"]:focus {
-      border-color: #5599dd;
-    }
+    .controls input[type="number"]:focus { border-color: #5599dd; }
 
     .controls button {
       padding: 8px 20px;
@@ -178,10 +149,7 @@
       transition: background 0.2s, transform 0.1s;
     }
 
-    .controls button:hover {
-      background: #3a82e0;
-      transform: translateY(-1px);
-    }
+    .controls button:hover { background: #3a82e0; transform: translateY(-1px); }
 
     #grid-container {
       display: grid;
@@ -193,9 +161,7 @@
       border: 1px solid #1e3d70;
     }
 
-    #grid-container:empty {
-      display: none;
-    }
+    #grid-container:empty { display: none; }
 
     .cell {
       width: 80px;
@@ -216,9 +182,7 @@
       background-position: center !important;
     }
 
-    .cell[data-value="0"] {
-      background: #111a2e url('images/hole.png') center center / cover no-repeat !important;
-    }
+    .cell[data-value="0"] { background: #111a2e url('images/hole.png') center center / cover no-repeat !important; }
     .cell[data-value="1"] { background: #1a3a6a; color: #2a4a6a; border-color: #234a88; }
     .cell[data-value="2"] { background: #1a4a6a; color: #2a5a7a; border-color: #236088; }
     .cell[data-value="3"] { background: #1a5060; color: #2a6070; border-color: #237880; }
@@ -236,9 +200,7 @@
       cursor: pointer;
     }
 
-    .cell.valid-move:hover {
-      transform: scale(1.1);
-    }
+    .cell.valid-move:hover { transform: scale(1.1); }
 
     .cell.valid-move-p2 {
       box-shadow: 0 0 16px rgba(165, 28, 28, 0.5);
@@ -247,9 +209,7 @@
       cursor: pointer;
     }
 
-    .cell.valid-move-p2:hover {
-      transform: scale(1.1);
-    }
+    .cell.valid-move-p2:hover { transform: scale(1.1); }
 
     .penguin {
       position: absolute;
@@ -285,9 +245,7 @@
       z-index: 10;
     }
 
-    #overlay.show {
-      display: flex;
-    }
+    #overlay.show { display: flex; }
 
     #overlay h2 {
       font-size: 2.5rem;
@@ -312,9 +270,7 @@
       margin: 6px;
     }
 
-    #overlay button:hover {
-      background: #3a82e0;
-    }
+    #overlay button:hover { background: #3a82e0; }
 
     .slide-arrow {
       width: 56px;
@@ -333,9 +289,7 @@
       align-self: center;
     }
 
-    .slide-arrow:hover {
-      background: #2a4a90;
-    }
+    .slide-arrow:hover { background: #2a4a90; }
   </style>
 </head>
 <body>
@@ -433,7 +387,6 @@
   </div>
 
   <script>
-    // ---- TRANSLATIONS ----
     let currentLang = 'en';
 
     const translations = {
@@ -548,7 +501,6 @@
       document.getElementById('slide-text').textContent = slides[lang][currentSlide].text;
     }
 
-    // ---- SCREEN NAVIGATION ----
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -798,10 +750,11 @@
 
       updateStatus();
       renderGrid();
-      
+
       if (gameMode === 'cpu' && currentTurn === 1) {
         setTimeout(cpuMove, 700);
       }
+    }
 
     function cpuMove() {
       if (gameOver) return;
