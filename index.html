@@ -627,8 +627,11 @@
 
       if (mode === 'join') {
         decreaseSquare(newRow, newCol, i, true);
-      } else if (mode === 'leave') {
+       } else if (mode === 'leave') {
         decreaseSquare(oldRow, oldCol, i, false);
+        if (gridData[newRow][newCol] <= 0) {
+          penguins[i].alive = false;
+        }
       }
     }
 
